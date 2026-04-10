@@ -1,4 +1,4 @@
-import { Alert, Text, TouchableOpacity, View } from "react-native";
+import { ActivityIndicator, Alert, Text, TouchableOpacity, View } from "react-native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { STORAGE_SOMA } from "../../constants/Keys";
 import { useEffect, useState } from "react";
@@ -7,6 +7,7 @@ import { StatusBar } from 'expo-status-bar';
 
 export default function Exercicio1() {
     const [count, setCount] = useState(0);
+    const [isLoading, setIsLoading] = useState(false);
 
     async function handlerSomar() {
         try {
@@ -22,8 +23,8 @@ export default function Exercicio1() {
 
     async function handlerZerar() {
         try {
-            await AsyncStorage.removeItem(STORAGE_SOMA);
             count > 0 ? setCount(0) : Alert.alert("Contador zerado", "Pare de CLICAR PARA ZERAR MONGOL!");
+            await AsyncStorage.removeItem(STORAGE_SOMA);
         } catch (error) {
             Alert.alert("Erro: " + error);
         }
@@ -31,11 +32,33 @@ export default function Exercicio1() {
 
     useEffect(() => {
         (async () => {
-            const raw = await AsyncStorage.getItem(STORAGE_SOMA);
-            const atual = raw !== null ? JSON.parse(raw) : 0;
-            setCount(atual);
+            try {
+                setIsLoading(true);
+                await new Promise((resolve) => setTimeout(resolve, 2000));
+
+                const raw = await AsyncStorage.getItem(STORAGE_SOMA);
+                const atual = raw !== null ? JSON.parse(raw) : 0;
+                setCount(atual);
+
+            } catch (error) {
+                Alert.alert("Erro: " + error);
+            } finally {
+                setIsLoading(false);
+            }
         })();
     }, []);
+
+    if (isLoading) {
+    return (
+      <View style={{
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center"
+      }}>
+        <ActivityIndicator size="large" color="#41ffff" />
+      </View>
+    )
+  }
 
 
     return (
