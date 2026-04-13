@@ -64,6 +64,7 @@ export default function Exercicio1() {
     return (
         <SafeAreaView style={{ flex: 1, justifyContent: 'center' }}>
             <View style={{ alignItems: 'center' }}>
+                <Text style={{ padding: 10, backgroundColor: "#32f1ce", borderRadius: 10, marginBottom: 15, fontSize: 16 }}>Super Contador 2000</Text>
                 <Text style={{ padding: 10, backgroundColor: "#66dbff", borderRadius: 10 }}>Quantidade de cliques: {count}</Text>
                 <View style={{ flexDirection: "row", gap: 10, margin: "auto", marginTop: 10 }}>
                     <TouchableOpacity onPress={handlerSomar} style={{ padding: 7, backgroundColor: "#47c62b", borderRadius: 10 }}>

@@ -4,6 +4,7 @@ import { Pressable, Text } from 'react-native';
 import Home from '../screens/Home/HomeScreen';
 import Exercicio1 from '../screens/exercicio1/Exercicio1Screen';
 import Exercicio2 from '../screens/exercicio2/Exercicio2Screen';
+import Exercicio3 from '../screens/exercicio3/Exercicio3Screen';
 
 const { Navigator, Screen } = createDrawerNavigator();
 
@@ -23,6 +24,7 @@ export function DrawerRoutes() {
             <Screen name='Home' component={Home} />
             <Screen name='Exercício 1' component={Exercicio1} />
             <Screen name='Exercício 2' component={Exercicio2} />
+            <Screen name='Exercício 3' component={Exercicio3} />
         </Navigator>
     )
 }
